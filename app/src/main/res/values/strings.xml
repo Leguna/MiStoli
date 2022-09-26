@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">MiStoli</string>
+    <string name="app_name">MiStoly</string>
+    <string name="isRequired">is Required</string>
+    <string name="needAtLeast">need at least</string>
+    <string name="character">character</string>
+    <string name="back">back</string>
+    <string name="login_title">"Lets see some story"</string>
+    <string name="illustration">Illustration</string>
+    <string name="email_hint">Email</string>
+    <string name="login">Login</string>
+    <string name="signup_hint">"Doesn't have account? Register!"</string>
+    <string name="signup_title">"Let's create some account so you can see some stoly."</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Password</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="name_hint">Name</string>
+    <string name="signup">Sign Up</string>
+    <string name="story">Story</string>
+    <string name="story_image">Story Image</string>
+    <string name="hyphen">-</string>
+    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="invalid_email">Not a valid email</string>
+    <string name="notMatch">not Match</string>
 </resources>

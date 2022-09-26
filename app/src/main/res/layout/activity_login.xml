@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+    </data>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".auth.LoginActivity">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_title"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/large_text"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_signup"
+                    app:layout_constraintStart_toStartOf="@+id/iv_signup"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_signup" />
+
+                <ImageView
+                    android:id="@+id/iv_signup"
+                    android:layout_width="0dp"
+                    android:layout_height="250dp"
+                    android:contentDescription="@string/illustration"
+                    android:src="@drawable/welcome_sign"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.19999999" />
+
+
+                <com.arksana.mistoly.mycustomview.MyFormField
+                    android:id="@+id/ed_login_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/large"
+                    app:hideLabel="true"
+                    app:hint="@string/email_hint"
+                    app:isRequired="true"
+                    app:label="@string/email"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+                <com.arksana.mistoly.mycustomview.MyFormField
+                    android:id="@+id/ed_login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal"
+                    app:hideLabel="true"
+                    app:hint="@string/password"
+                    app:isPassword="true"
+                    app:isRequired="true"
+                    app:label="@string/password"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.843"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ed_login_email"
+                    app:length="6" />
+
+                <com.arksana.mistoly.mycustomview.MyButton
+                    android:id="@+id/btn_login"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/normal"
+                    android:text="@string/login"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ed_login_password" />
+
+                <TextView
+                    android:id="@+id/register_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/normal"
+                    android:text="@string/signup_hint"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <include
+            android:id="@+id/loading_view"
+            layout="@layout/loading_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </FrameLayout>
+</layout>

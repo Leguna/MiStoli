@@ -1,4 +1,4 @@
-package com.arksana.mistoli
+package com.arksana.mistoly
 
 import org.junit.Test
 
