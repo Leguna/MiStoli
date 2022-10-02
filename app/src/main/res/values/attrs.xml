@@ -8,4 +8,9 @@
         <attr name="isPassword" format="boolean" />
         <attr name="isRequired" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="AppWidgetAttrs">
+        <attr name="appWidgetPadding" format="dimension" />
+        <attr name="appWidgetInnerRadius" format="dimension" />
+        <attr name="appWidgetRadius" format="dimension" />
+    </declare-styleable>
 </resources>

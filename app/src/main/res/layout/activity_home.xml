@@ -10,16 +10,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".stoly.HomeActivity">
+        tools:context=".ui.home.HomeActivity">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_list"
-            android:name="com.arksana.mistoly.stoly.StoliFragment"
+            android:name="com.arksana.mistoly.ui.home.StolyFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout="@layout/fragment_item_list" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal"
+            android:contentDescription="@string/add_story"
+            android:src="@drawable/ic_baseline_add"
+            app:backgroundTint="@color/secondaryColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="30dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

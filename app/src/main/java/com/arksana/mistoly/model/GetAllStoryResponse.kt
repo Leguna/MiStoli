@@ -9,5 +9,5 @@ data class GetAllStoryResponse(
     @SerializedName("message")
     val message: String?,
     @SerializedName("listStory")
-    val listStory: List<Story?>?
+    val listStory: List<Story>?
 )

@@ -9,7 +9,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
-interface DicodingStoryApi {
+interface StoryApiInterface {
 
     @POST("register")
     fun register(@Body user: UserModel): Call<BaseResponse>
@@ -26,11 +26,11 @@ interface DicodingStoryApi {
     ): Call<BaseResponse>
 
     @GET("stories")
-    suspend fun getAllStories(
+    fun getAllStories(
         @Header("Authorization") token: String,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("location") location: Int = 0
-    ): GetAllStoryResponse
+        @Query("location") location: Int = 0,
+    ): Call<GetAllStoryResponse>
 
 }

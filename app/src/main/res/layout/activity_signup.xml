@@ -10,7 +10,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".auth.SignUpActivity">
+        tools:context=".ui.auth.SignUpActivity">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -23,12 +23,11 @@
                 android:paddingVertical="@dimen/normal">
 
                 <ImageView
-                    android:id="@+id/iv_signup"
+                    android:id="@+id/iv_sign_in"
                     android:layout_width="0dp"
                     android:layout_height="250dp"
                     android:layout_marginTop="@dimen/extra_large"
                     android:contentDescription="@string/illustration"
-                    android:src="@drawable/sign_up_form"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +44,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_signup"/>
+                    app:layout_constraintTop_toBottomOf="@+id/iv_sign_in" />
 
                 <com.arksana.mistoly.mycustomview.MyFormField
                     android:id="@+id/ed_register_name"
@@ -132,7 +131,8 @@
 
         <include
             android:id="@+id/loading_view"
-            layout="@layout/loading_view" />
+            layout="@layout/loading_view"
+            tools:visibility="gone" />
 
     </FrameLayout>
 </layout>

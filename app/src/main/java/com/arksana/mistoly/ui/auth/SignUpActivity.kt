@@ -1,24 +1,18 @@
-package com.arksana.mistoly.auth
+package com.arksana.mistoly.ui.auth
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isEmpty
 import androidx.core.view.isNotEmpty
 import androidx.databinding.DataBindingUtil
 import com.arksana.mistoly.R
 import com.arksana.mistoly.databinding.ActivitySignupBinding
-import com.arksana.mistoly.model.BaseResponse
-import com.arksana.mistoly.model.UserModel
 import com.arksana.mistoly.model.UserPreference
 import com.arksana.mistoly.services.ApiService
 import com.arksana.mistoly.utils.Validator
 import com.arksana.mistoly.utils.keyboardHide
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.bumptech.glide.Glide
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
@@ -31,6 +25,13 @@ class SignUpActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
         setContentView(binding.root)
         setCallbacks()
+        setView()
+    }
+
+    private fun setView() {
+        Glide.with(this)
+            .load(R.drawable.sign_up_form)
+            .into(binding.ivSignIn)
     }
 
     private fun setCallbacks() {
@@ -61,37 +62,34 @@ class SignUpActivity : AppCompatActivity() {
                 edRegisterEmail.isNotEmpty() && edRegisterName.isNotEmpty() && edRegisterPassword.isNotEmpty() && edRegisterPasswordRepeat.isNotEmpty()
             if (isValid) {
                 binding.loadingView.group.visibility = View.VISIBLE
-                ApiService().register(UserModel(name = name, email = email, password = password))
-                    .enqueue(object : Callback<BaseResponse> {
-                        override fun onResponse(
-                            call: Call<BaseResponse>, response: Response<BaseResponse>
-                        ) {
-                            if (response.isSuccessful) {
+                apiService =
+                    ApiService(context = applicationContext)
+                signUpViewModel = SignUpViewModel(apiService)
+                signUpViewModel.register(
+                    name = name,
+                    email = email,
+                    password = password,
+                    callback = { isSuccess, message ->
+                        run {
+                            if (isSuccess) {
                                 binding.loadingView.group.visibility = View.GONE
                                 Toast.makeText(
                                     applicationContext,
-                                    response.body()?.message ?: "",
+                                    message,
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 finish()
                             } else {
-                                val jsonObj =
-                                    JSONObject(response.errorBody()!!.charStream().readText())
                                 Toast.makeText(
                                     applicationContext,
-                                    jsonObj.getString("message") ?: "",
+                                    message.ifEmpty { getString(R.string.failed) },
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                             binding.loadingView.group.visibility = View.GONE
                         }
-
-                        override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                            Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
-                            binding.loadingView.group.visibility = View.GONE
-                        }
-
                     })
+
             }
         }
     }

@@ -25,26 +25,67 @@
         android:supportsRtl="true"
         android:theme="@style/MiStoly"
         tools:targetApi="s">
+        <service
+            android:name=".services.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <receiver
+            android:name=".ui.widget.StoryImageStack"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/story_image_stack_info" />
+        </receiver>
+
         <activity
-            android:name=".stoly.HomeActivity"
+            android:name=".ui.stoly.DetailStoryActivity"
+            android:exported="false"
+            android:theme="@style/MiStoly.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.stoly.AddStoryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".auth.LoginActivity"
+            android:name=".ui.home.HomeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.auth.LoginActivity"
             android:exported="true"
             android:theme="@style/MiStoly.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".auth.SignUpActivity"
+            android:name=".ui.auth.SignUpActivity"
             android:exported="false"
             android:theme="@style/MiStoly.NoActionBar" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.arksana.mistoly.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

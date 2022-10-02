@@ -1,4 +1,4 @@
-package com.arksana.mistoly.auth
+package com.arksana.mistoly.ui.auth
 
 import android.content.Context
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -16,9 +17,10 @@ import com.arksana.mistoly.databinding.ActivityLoginBinding
 import com.arksana.mistoly.model.UserModel
 import com.arksana.mistoly.model.UserPreference
 import com.arksana.mistoly.services.ApiService
-import com.arksana.mistoly.stoly.HomeActivity
+import com.arksana.mistoly.ui.home.HomeActivity
 import com.arksana.mistoly.utils.Validator
 import com.arksana.mistoly.utils.keyboardHide
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -50,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
                     finish()
                 } else {
-                    apiService = ApiService(userLogin.token ?: "")
+                    apiService = ApiService(userLogin.token ?: "", context = applicationContext)
                     loginViewModel = LoginViewModel(userPreference, apiService)
                     loginViewModel.getUser()
                         .observe(this@LoginActivity) { userModel -> userLogin = userModel }
@@ -63,11 +65,12 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener { login() }
         binding.registerText.setOnClickListener { goToRegisterPage() }
         binding.edLoginEmail.validator = { Validator.email(resources, it) }
+        Glide.with(this).load(R.drawable.welcome_sign).into(binding.ivSignIn)
     }
 
     private fun goToRegisterPage() {
         val intent = Intent(this, SignUpActivity::class.java)
-        startActivity(intent)
+        startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
     }
 
     private fun login() {
@@ -77,20 +80,20 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loadingView.group.visibility = View.VISIBLE
 
-        loginViewModel.login(
-            binding.edLoginEmail.text.toString(),
+        loginViewModel.login(binding.edLoginEmail.text.toString(),
             binding.edLoginPassword.text.toString(),
-            onSuccess = {
-                startActivity(Intent(this, HomeActivity::class.java))
-                finish()
-            },
-            onFailure = {
-                try {
-                    Toast.makeText(this@LoginActivity, it, Toast.LENGTH_LONG).show()
-                } catch (e: Exception) {
-                    Toast.makeText(this@LoginActivity, e.message, Toast.LENGTH_LONG).show()
-                }
+            callback = { isSuccess: Boolean, message: String ->
                 binding.loadingView.group.visibility = View.GONE
+                if (isSuccess) {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        message.ifEmpty { getString(R.string.failed) },
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             })
     }
 }

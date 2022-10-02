@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-    </data>
+    <data></data>
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".auth.LoginActivity">
+        tools:context=".ui.auth.LoginActivity">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -32,16 +31,15 @@
                     android:text="@string/login_title"
                     android:textColor="@color/black"
                     android:textSize="@dimen/large_text"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_signup"
-                    app:layout_constraintStart_toStartOf="@+id/iv_signup"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_signup" />
+                    app:layout_constraintEnd_toEndOf="@+id/iv_sign_in"
+                    app:layout_constraintStart_toStartOf="@+id/iv_sign_in"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_sign_in" />
 
                 <ImageView
-                    android:id="@+id/iv_signup"
+                    android:id="@+id/iv_sign_in"
                     android:layout_width="0dp"
                     android:layout_height="250dp"
                     android:contentDescription="@string/illustration"
-                    android:src="@drawable/welcome_sign"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +109,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
     </FrameLayout>
 </layout>

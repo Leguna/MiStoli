@@ -55,9 +55,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'com.google.code.gson:gson:2.9.0'
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation "com.github.leonardoxh:retrofit2-livedata-adapter:1.1.2"
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
@@ -67,4 +68,7 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.4.3'
     implementation 'androidx.room:room-paging:2.4.3'
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 }

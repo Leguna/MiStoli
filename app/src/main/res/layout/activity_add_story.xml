@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.stoly.AddStoryActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/normal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/image_parent"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_margin="@dimen/large"
+                app:cardCornerRadius="@dimen/small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/preview_image_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/image_story"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image_placeholder"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.cardview.widget.CardView>
+
+            <com.arksana.mistoly.mycustomview.MyButton
+                android:id="@+id/btn_camera"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large"
+                android:layout_marginEnd="@dimen/small"
+                android:text="@string/camera"
+                app:layout_constraintEnd_toStartOf="@+id/g_line"
+                app:layout_constraintStart_toStartOf="@+id/image_parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_parent" />
+
+            <com.arksana.mistoly.mycustomview.MyButton
+                android:id="@+id/btn_gallery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small"
+                android:layout_marginTop="@dimen/large"
+                android:text="@string/gallery"
+                app:layout_constraintEnd_toEndOf="@+id/image_parent"
+                app:layout_constraintStart_toStartOf="@+id/g_line"
+                app:layout_constraintTop_toBottomOf="@+id/image_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/giant"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_camera">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@id/ed_add_description"
+                    android:text="@string/add_your_story_title" />
+
+                <EditText
+                    android:id="@+id/ed_add_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="top|start"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
+                    android:textAlignment="textStart"
+                    tools:text="Ini ceritaku..." />
+
+                <com.arksana.mistoly.mycustomview.MyButton
+                    android:id="@+id/btn_add"
+                    android:layout_marginTop="@dimen/small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/submit" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/g_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/loading_view"
+        layout="@layout/loading_view"
+        tools:visibility="gone" />
+
+</FrameLayout>
