@@ -1,11 +1,9 @@
 package com.arksana.mistoly.ui.auth
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.arksana.mistoly.model.BaseResponse
 import com.arksana.mistoly.model.LoginResponse
 import com.arksana.mistoly.model.UserModel
 import com.arksana.mistoly.model.UserPreference

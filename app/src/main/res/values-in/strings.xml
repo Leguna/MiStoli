@@ -17,7 +17,6 @@
     <string name="name">Nama</string>
     <string name="name_hint">Nama</string>
     <string name="signup">Daftar</string>
-    <string name="story">Cerita</string>
     <string name="story_image">Gambar Cerita</string>
     <string name="hyphen">-</string>
     <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
@@ -34,14 +33,8 @@
     <string name="successful">Berhasil menambah cerita</string>
     <string name="failed">Mohon cek koneksi anda</string>
     <string name="add_description">Mohon isi deskripsi</string>
-    <string name="description">Deskripsi</string>
-    <string name="created_by">Dibuat oleh</string>
-    <string name="on">pada</string>
     <string name="refresh">Segarkan</string>
-    <string name="empty">Kosong</string>
     <string name="empty_list">Tidak ada cerita untuk ditunjukkan</string>
     <string name="error_message">Terdapat masalah</string>
     <string name="appwidget_text">Rak Stoly</string>
-    <string name="add_widget">Tambah Alat</string>
-    <string name="app_widget_description">Alat untuk melihat daftar cerita</string>
 </resources>

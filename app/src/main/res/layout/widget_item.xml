@@ -11,5 +11,6 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
+        android:contentDescription="@string/image_story"
         tools:srcCompat="@drawable/image_placeholder" />
 </LinearLayout>

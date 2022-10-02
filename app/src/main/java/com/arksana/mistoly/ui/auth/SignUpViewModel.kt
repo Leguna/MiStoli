@@ -1,6 +1,5 @@
 package com.arksana.mistoly.ui.auth
 
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arksana.mistoly.model.BaseResponse

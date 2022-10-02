@@ -8,7 +8,6 @@ import androidx.core.view.isNotEmpty
 import androidx.databinding.DataBindingUtil
 import com.arksana.mistoly.R
 import com.arksana.mistoly.databinding.ActivitySignupBinding
-import com.arksana.mistoly.model.UserPreference
 import com.arksana.mistoly.services.ApiService
 import com.arksana.mistoly.utils.Validator
 import com.arksana.mistoly.utils.keyboardHide
@@ -16,7 +15,6 @@ import com.bumptech.glide.Glide
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
-    private lateinit var userPreference: UserPreference
     private lateinit var apiService: ApiService
     private lateinit var signUpViewModel: SignUpViewModel
 

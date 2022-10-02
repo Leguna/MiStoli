@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.arksana.mistoly.R
 import com.arksana.mistoly.databinding.ActivityDetailStoryBinding
 import com.arksana.mistoly.model.Story
 import com.arksana.mistoly.model.UserPreference
@@ -37,7 +36,7 @@ class DetailStoryActivity : AppCompatActivity() {
         Gson().fromJson(story, Story::class.java).let {
             binding.tvDetailName.text = it.name
             binding.tvDetailDate.text =
-                "${parseTimeAgo(it.createdAt)}"
+                parseTimeAgo(it.createdAt)
             binding.tvDetailDescription.text = it.description
             Glide.with(this)
                 .load(it.photoUrl)
@@ -46,7 +45,7 @@ class DetailStoryActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
-        binding.backBtn.setOnClickListener {
+        binding.buttonBack.setOnClickListener {
             finish()
         }
     }

@@ -28,7 +28,6 @@
                 <ImageView
                     android:id="@+id/iv_detail_photo"
                     android:layout_width="match_parent"
-
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/image_story"
@@ -71,7 +70,7 @@
     </ScrollView>
 
     <ImageView
-        android:id="@+id/backBtn"
+        android:id="@+id/button_back"
         android:layout_width="@dimen/extra_large"
         android:layout_height="@dimen/extra_large"
         android:layout_margin="@dimen/normal"

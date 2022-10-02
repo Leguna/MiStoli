@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
-import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.RecyclerView
 import com.arksana.mistoly.R
 import com.arksana.mistoly.databinding.FragmentItemBinding
@@ -40,7 +39,8 @@ class MyStoliRecyclerViewAdapter(
         val item = values[position]
         holder.bind(item)
         if (position == values.size - 1) {
-            (holder.card.layoutParams as MarginLayoutParams).bottomMargin = mContext.resources.getDimension(R.dimen.normal).toInt()
+            (holder.card.layoutParams as MarginLayoutParams).bottomMargin =
+                mContext.resources.getDimension(R.dimen.normal).toInt()
         }
     }
 

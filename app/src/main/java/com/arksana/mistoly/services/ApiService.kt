@@ -1,10 +1,12 @@
 package com.arksana.mistoly.services
 
 import android.content.Context
-import com.arksana.mistoly.model.*
+import com.arksana.mistoly.model.BaseResponse
+import com.arksana.mistoly.model.GetAllStoryResponse
+import com.arksana.mistoly.model.LoginResponse
+import com.arksana.mistoly.model.UserModel
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import kotlinx.coroutines.Job
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody

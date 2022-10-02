@@ -121,9 +121,9 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun setButtonListener() {
-        binding.btnCamera.setOnClickListener { startTakePhoto() }
-        binding.btnGallery.setOnClickListener { startGallery() }
-        binding.btnAdd.setOnClickListener { addNewStory() }
+        binding.buttonCamera.setOnClickListener { startTakePhoto() }
+        binding.buttonGallery.setOnClickListener { startGallery() }
+        binding.buttonAdd.setOnClickListener { addNewStory() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -188,7 +188,7 @@ class AddStoryActivity : AppCompatActivity() {
             getFile = myFile
 
             val result = BitmapFactory.decodeFile(getFile?.path)
-            binding.previewImageView.setImageBitmap(result)
+            binding.ivPreviewImage.setImageBitmap(result)
         }
     }
 
@@ -199,7 +199,7 @@ class AddStoryActivity : AppCompatActivity() {
             val selectedImg: Uri = result.data?.data as Uri
             val myFile = uriToFile(selectedImg, this@AddStoryActivity)
             getFile = myFile
-            binding.previewImageView.setImageURI(selectedImg)
+            binding.ivPreviewImage.setImageURI(selectedImg)
         }
     }
 

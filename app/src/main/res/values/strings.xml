@@ -16,7 +16,6 @@
     <string name="name">Name</string>
     <string name="name_hint">Name</string>
     <string name="signup">Sign Up</string>
-    <string name="story">Story</string>
     <string name="story_image">Story Image</string>
     <string name="hyphen">-</string>
     <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
@@ -33,14 +32,8 @@
     <string name="successful">Successful Add Story</string>
     <string name="failed">Please check your connection</string>
     <string name="add_description">Please add description first</string>
-    <string name="description">Description</string>
-    <string name="created_by">Created by</string>
-    <string name="on">on</string>
     <string name="refresh">Refresh</string>
-    <string name="empty">Empty</string>
     <string name="empty_list">No Story to Show</string>
     <string name="error_message">There is a problem</string>
     <string name="appwidget_text">Stoly Shelf</string>
-    <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">Widget for story list</string>
 </resources>

@@ -28,27 +28,25 @@ class HomeViewModel(
     }
 
     fun getStories(callback: (isError: Boolean, message: String) -> Unit) {
-        storyRepo.getAllStories(_user.value?.token ?: "").let {
-            it.enqueue(object : retrofit2.Callback<GetAllStoryResponse> {
-                override fun onResponse(
-                    call: Call<GetAllStoryResponse>,
-                    response: retrofit2.Response<GetAllStoryResponse>,
-                ) {
-                    if (response.isSuccessful) {
-                        _stories.value = response.body()?.listStory ?: ArrayList()
-                        callback(false, "")
-                    } else {
-                        _stories.value = ArrayList()
-                        callback(true, response.message())
-                    }
-                }
-
-                override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+        storyRepo.getAllStories(_user.value?.token ?: "").enqueue(object : retrofit2.Callback<GetAllStoryResponse> {
+            override fun onResponse(
+                call: Call<GetAllStoryResponse>,
+                response: retrofit2.Response<GetAllStoryResponse>,
+            ) {
+                if (response.isSuccessful) {
+                    _stories.value = response.body()?.listStory ?: ArrayList()
+                    callback(false, "")
+                } else {
                     _stories.value = ArrayList()
-                    callback(true, "")
+                    callback(true, response.message())
                 }
-            })
-        }
+            }
+
+            override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+                _stories.value = ArrayList()
+                callback(true, "")
+            }
+        })
     }
 
     fun logout() {

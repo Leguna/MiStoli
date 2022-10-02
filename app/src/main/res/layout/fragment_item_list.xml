@@ -20,9 +20,9 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <include
+        tools:visibility="gone"
         android:id="@+id/loading_view"
-        layout="@layout/loading_view"
-        tools:visibility="gone" />
+        layout="@layout/loading_view" />
 
     <TextView
         android:id="@+id/message"
@@ -34,5 +34,6 @@
         android:textSize="@dimen/large_text"
         android:visibility="gone"
         tools:visibility="gone" />
+
 
 </FrameLayout>

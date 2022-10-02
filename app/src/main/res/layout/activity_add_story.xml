@@ -26,7 +26,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/preview_image_view"
+                    android:id="@+id/iv_preview_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
@@ -40,7 +40,7 @@
             </androidx.cardview.widget.CardView>
 
             <com.arksana.mistoly.mycustomview.MyButton
-                android:id="@+id/btn_camera"
+                android:id="@+id/button_camera"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/large"
@@ -51,7 +51,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/image_parent" />
 
             <com.arksana.mistoly.mycustomview.MyButton
-                android:id="@+id/btn_gallery"
+                android:id="@+id/button_gallery"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small"
@@ -69,7 +69,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_camera">
+                app:layout_constraintTop_toBottomOf="@+id/button_camera">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                     tools:text="Ini ceritaku..." />
 
                 <com.arksana.mistoly.mycustomview.MyButton
-                    android:id="@+id/btn_add"
+                    android:id="@+id/button_add"
                     android:layout_marginTop="@dimen/small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

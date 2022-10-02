@@ -20,10 +20,6 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
-    var isLogin = dataStore.data.map { preferences: Preferences ->
-        preferences[USER_ID_KEY] == ""
-    }
-
     suspend fun saveUser(user: UserModel) {
         dataStore.edit { preferences ->
             preferences[NAME_KEY] = "${user.name}"
