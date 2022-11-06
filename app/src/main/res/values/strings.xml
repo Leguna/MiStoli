@@ -36,4 +36,6 @@
     <string name="empty_list">No Story to Show</string>
     <string name="error_message">There is a problem</string>
     <string name="appwidget_text">Stoly Shelf</string>
+    <string name="success">Success get data</string>
+    <string name="map">Maps</string>
 </resources>

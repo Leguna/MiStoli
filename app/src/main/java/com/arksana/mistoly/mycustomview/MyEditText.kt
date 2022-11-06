@@ -1,5 +1,6 @@
 package com.arksana.mistoly.mycustomview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
@@ -45,7 +46,9 @@ class MyEditText : AppCompatEditText, OnTouchListener {
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
     }
 
+    @SuppressLint("CustomViewStyleable")
     private fun init(attrs: AttributeSet? = null) {
+        
         endButtonImage =
             ContextCompat.getDrawable(context, R.drawable.ic_baseline_close) as Drawable
         setOnTouchListener(this)
@@ -80,7 +83,7 @@ class MyEditText : AppCompatEditText, OnTouchListener {
         startOfTheText: Drawable? = null,
         topOfTheText: Drawable? = null,
         endOfTheText: Drawable? = null,
-        bottomOfTheText: Drawable? = null
+        bottomOfTheText: Drawable? = null,
     ) {
         setCompoundDrawablesWithIntrinsicBounds(
             startOfTheText, topOfTheText, endOfTheText, bottomOfTheText
@@ -96,7 +99,7 @@ class MyEditText : AppCompatEditText, OnTouchListener {
         if (!isPassword) return
 
         this.isTextShow = isTextShow
-        var drawable: Drawable? = null
+        val drawable: Drawable?
         if (isTextShow) {
             drawable = ContextCompat.getDrawable(
                 context, R.drawable.ic_outline_remove_red_eye

@@ -37,4 +37,5 @@
     <string name="empty_list">Tidak ada cerita untuk ditunjukkan</string>
     <string name="error_message">Terdapat masalah</string>
     <string name="appwidget_text">Rak Stoly</string>
+    <string name="success">Sukses mengambil data</string>
 </resources>

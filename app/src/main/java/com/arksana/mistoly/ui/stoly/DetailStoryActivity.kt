@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.arksana.mistoly.data.StoryRepository
 import com.arksana.mistoly.databinding.ActivityDetailStoryBinding
 import com.arksana.mistoly.model.Story
 import com.arksana.mistoly.model.UserPreference
@@ -53,8 +54,9 @@ class DetailStoryActivity : AppCompatActivity() {
     private fun viewModelSetup() {
         detailStoryViewModel = ViewModelProvider(this,
             ViewModelFactory(
-                ApiService(context = baseContext),
                 UserPreference.getInstance(dataStore),
+                StoryRepository.getInstance(this),
+                ApiService.getInstance(this),
             ))[DetailStoryViewModel::class.java]
     }
 

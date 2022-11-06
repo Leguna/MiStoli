@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,6 @@ class StolyFragment : Fragment() {
 
         with(binding.list) {
             layoutManager = LinearLayoutManager(context)
-            adapter = MyStoliRecyclerViewAdapter(ArrayList())
         }
         return binding.root
     }
@@ -30,26 +30,27 @@ class StolyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
-        homeViewModel.stories.observe(viewLifecycleOwner) { stories ->
-            (binding.list.adapter as MyStoliRecyclerViewAdapter).submitList(stories)
-            if (stories?.isNotEmpty() == true) {
-                binding.message.visibility = View.GONE
-                binding.message.text = ""
-            } else {
-                binding.message.text = getString(R.string.empty_list)
+        binding.loadingView.group.visibility = View.GONE
+        binding.list.adapter = MyStoliRecyclerViewAdapter()
+        val adapter = (binding.list.adapter as MyStoliRecyclerViewAdapter)
+
+        homeViewModel.getAllStories().observe(viewLifecycleOwner) { stories ->
+            binding.loadingView.group.visibility = View.VISIBLE
+
+            try {
+                adapter.submitData(lifecycle, stories)
+            } catch (e: Exception) {
+                Toast.makeText(context, getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+                binding.message.text = getString(R.string.error_message)
                 binding.message.visibility = View.VISIBLE
             }
+
+            binding.loadingView.group.visibility = View.GONE
         }
-        refresh()
     }
 
     fun refresh() {
-        binding.loadingView.group.visibility = View.VISIBLE
-        homeViewModel.getStories(callback = { isError, message ->
-            binding.message.text = message.ifEmpty { getString(R.string.error_message) }
-            binding.message.visibility = if (isError) View.VISIBLE else View.GONE
-            binding.loadingView.group.visibility = View.GONE
-        })
+        homeViewModel.getAllStories()
     }
 
 }

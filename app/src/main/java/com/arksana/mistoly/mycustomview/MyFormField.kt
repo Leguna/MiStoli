@@ -22,11 +22,11 @@ class MyFormField : LinearLayout {
     var validator: ((text: String) -> String)? = null
     var afterTextChanged: ((text: String) -> Unit)? = null
 
-    val text: Editable?
-        get() {
-            return formFieldBinding.myEditText.text
+    var text: Editable?
+        get() = formFieldBinding.myEditText.text
+        set(value) {
+            formFieldBinding.myEditText.text = value
         }
-
 
     constructor(context: Context?) : super(context) {
         init(context)
@@ -42,9 +42,9 @@ class MyFormField : LinearLayout {
         init(context, attrs)
     }
 
-
     private fun init(context: Context?, attrs: AttributeSet? = null) {
         formFieldBinding = MyFormFieldBinding.inflate(LayoutInflater.from(context), this, true)
+
         val array = getContext().obtainStyledAttributes(attrs, R.styleable.MyFormField)
 
         try {
@@ -67,7 +67,7 @@ class MyFormField : LinearLayout {
 
             formFieldBinding.myEditText.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
-                    s: CharSequence, start: Int, count: Int, after: Int
+                    s: CharSequence, start: Int, count: Int, after: Int,
                 ) {
                 }
 
@@ -75,8 +75,8 @@ class MyFormField : LinearLayout {
                 }
 
                 override fun afterTextChanged(s: Editable) {
-                    afterTextChanged?.invoke(s.toString())
                     validateText()
+                    afterTextChanged?.invoke(s.toString())
                 }
             })
         } finally {
@@ -102,7 +102,6 @@ class MyFormField : LinearLayout {
         return when {
             isRequired && formFieldBinding.myEditText.text.toString().isEmpty() -> {
                 "${label.replaceFirstChar { it.uppercase() }} ${context.getString(R.string.isRequired)}"
-
             }
             lengthMin != -1 && (formFieldBinding.myEditText.text?.length ?: 0) < lengthMin -> {
                 "${label.replaceFirstChar { it.uppercase() }} ${context.getString(R.string.needAtLeast)} $lengthMin ${

@@ -10,12 +10,14 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.arksana.mistoly.R
+import com.arksana.mistoly.data.StoryRepository
 import com.arksana.mistoly.databinding.ActivityHomeBinding
 import com.arksana.mistoly.model.UserPreference
 import com.arksana.mistoly.services.ApiService
 import com.arksana.mistoly.ui.ViewModelFactory
 import com.arksana.mistoly.ui.auth.LoginActivity
 import com.arksana.mistoly.ui.auth.dataStore
+import com.arksana.mistoly.ui.maps.MapsActivity
 import com.arksana.mistoly.ui.stoly.AddStoryActivity
 
 
@@ -34,8 +36,9 @@ class HomeActivity : AppCompatActivity() {
     private fun viewModelSetup() {
         homeViewModel = ViewModelProvider(this,
             ViewModelFactory(
-                ApiService(context = baseContext),
                 UserPreference.getInstance(dataStore),
+                StoryRepository.getInstance(this),
+                ApiService.getInstance(this)
             ))[HomeViewModel::class.java]
         homeViewModel.getUserPref().observe(this) { user ->
             if (user?.token.isNullOrEmpty()) {
@@ -68,6 +71,13 @@ class HomeActivity : AppCompatActivity() {
                 supportFragmentManager.findFragmentById(R.id.fragment_list)?.let {
                     (it as StolyFragment).refresh()
                 }
+                true
+            }
+            R.id.map -> {
+                startActivity(
+                    Intent(this, MapsActivity::class.java),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle(),
+                )
                 true
             }
             else -> super.onOptionsItemSelected(item)

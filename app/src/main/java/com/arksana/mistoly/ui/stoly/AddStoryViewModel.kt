@@ -27,21 +27,22 @@ class AddStoryViewModel(
         callback: (Boolean) -> Unit,
     ) {
         storyRepo.token = token.toString()
-        storyRepo.addNewStory(description, file).enqueue(object : retrofit2.Callback<BaseResponse> {
-            override fun onResponse(
-                call: retrofit2.Call<BaseResponse>,
-                response: retrofit2.Response<BaseResponse>,
-            ) {
-                if (response.isSuccessful) {
-                    callback(true)
-                } else {
+        storyRepo.addNewStory(description, file)
+            .enqueue(object : retrofit2.Callback<BaseResponse> {
+                override fun onResponse(
+                    call: retrofit2.Call<BaseResponse>,
+                    response: retrofit2.Response<BaseResponse>,
+                ) {
+                    if (response.isSuccessful) {
+                        callback(true)
+                    } else {
+                        callback(false)
+                    }
+                }
+
+                override fun onFailure(call: retrofit2.Call<BaseResponse>, t: Throwable) {
                     callback(false)
                 }
-            }
-
-            override fun onFailure(call: retrofit2.Call<BaseResponse>, t: Throwable) {
-                callback(false)
-            }
-        })
+            })
     }
 }

@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.arksana.mistoly.R
+import com.arksana.mistoly.data.StoryRepository
 import com.arksana.mistoly.databinding.ActivityAddStoryBinding
 import com.arksana.mistoly.model.UserPreference
 import com.arksana.mistoly.services.ApiService
@@ -54,17 +55,14 @@ class AddStoryActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = applicationContext.getString(R.string.add_story)
 
-        if (!allPermissionsGranted()) {
-            ActivityCompat.requestPermissions(
-                this,
-                REQUIRED_PERMISSIONS,
-                REQUEST_CODE_PERMISSIONS
+        addStoryViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(
+                UserPreference.getInstance(dataStore),
+                StoryRepository.getInstance(baseContext),
+                ApiService.getInstance(baseContext),
             )
-        }
-
-        addStoryViewModel = ViewModelProvider(this,
-            ViewModelFactory(ApiService(context = baseContext),
-                UserPreference.getInstance(dataStore)))[AddStoryViewModel::class.java]
+        )[AddStoryViewModel::class.java]
 
         setButtonListener()
     }
@@ -156,6 +154,14 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun startGallery() {
+        if (!allPermissionsGranted()) {
+            ActivityCompat.requestPermissions(
+                this,
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
+            )
+            return
+        }
         val intent = Intent()
         intent.action = Intent.ACTION_GET_CONTENT
         intent.type = "image/*"
@@ -165,6 +171,14 @@ class AddStoryActivity : AppCompatActivity() {
 
     @SuppressLint("QueryPermissionsNeeded")
     private fun startTakePhoto() {
+        if (!allPermissionsGranted()) {
+            ActivityCompat.requestPermissions(
+                this,
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
+            )
+            return
+        }
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.resolveActivity(packageManager)
 

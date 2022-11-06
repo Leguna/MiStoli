@@ -1,9 +1,6 @@
 package com.arksana.mistoly.ui.auth
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.arksana.mistoly.model.LoginResponse
 import com.arksana.mistoly.model.UserModel
 import com.arksana.mistoly.model.UserPreference
@@ -15,22 +12,32 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginViewModel(
-    private val userPreference: UserPreference, private val apiService: ApiService,
+    private val apiService: ApiService,
+    private val userPreference: UserPreference,
 ) : ViewModel() {
 
-    private val user = MutableLiveData<UserModel>()
+    private val _user = MutableLiveData<UserModel>()
 
     fun getUser(): LiveData<UserModel> {
-        return user
+        userPreference.getUser().asLiveData().observeForever {
+            _user.value = it
+        }
+        return _user
+    }
+
+    fun setEmail(email: String) {
+        _user.value?.email = email
+    }
+
+    fun setPassword(password: String) {
+        _user.value?.password = password
     }
 
     fun login(
-        email: String,
-        password: String,
         callback: (isSuccess: Boolean, message: String) -> Unit,
     ) {
-        user.value = UserModel(email = email, password = password)
-        apiService.login(user.value!!).enqueue(object : Callback<LoginResponse> {
+        _user.value = UserModel(_user.value?.email, _user.value?.password)
+        apiService.login(_user.value!!).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
                 call: Call<LoginResponse>, response: Response<LoginResponse>,
             ) {
@@ -38,7 +45,7 @@ class LoginViewModel(
                     viewModelScope.launch {
                         val userResponse = response.body()?.userModel ?: UserModel()
                         userPreference.saveUser(userResponse)
-                        user.postValue(userResponse)
+                        _user.postValue(userResponse)
                         callback(true, response.body()?.message ?: "")
                     }
                 } else {

@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arksana.mistoly.R
 import com.arksana.mistoly.databinding.FragmentItemBinding
@@ -20,9 +22,8 @@ import com.arksana.mistoly.ui.stoly.DetailStoryActivity
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 
-class MyStoliRecyclerViewAdapter(
-    private val values: ArrayList<Story>,
-) : RecyclerView.Adapter<MyStoliRecyclerViewAdapter.ViewHolder>() {
+class MyStoliRecyclerViewAdapter() :
+    PagingDataAdapter<Story, MyStoliRecyclerViewAdapter.ViewHolder>(DIFF_CALLBACK) {
     private lateinit var mContext: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         mContext = parent.context
@@ -36,22 +37,13 @@ class MyStoliRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.bind(item)
-        if (position == values.size - 1) {
-            (holder.card.layoutParams as MarginLayoutParams).bottomMargin =
-                mContext.resources.getDimension(R.dimen.normal).toInt()
-        }
-    }
-
-    override fun getItemCount(): Int = values.size
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun submitList(stories: List<Story>?) {
-        stories?.let {
-            values.clear()
-            values.addAll(it)
-            notifyDataSetChanged()
+        val item = getItem(position)
+        if (item != null) {
+            holder.bind(item)
+            if (position == itemCount - 1) {
+                (holder.card.layoutParams as MarginLayoutParams).bottomMargin =
+                    mContext.resources.getDimension(R.dimen.normal).toInt()
+            }
         }
     }
 
@@ -70,6 +62,7 @@ class MyStoliRecyclerViewAdapter(
 
             Glide.with(mContext)
                 .load(story.photoUrl)
+                .placeholder(R.drawable.image_placeholder)
                 .into(image)
 
             itemView.setOnClickListener {
@@ -84,12 +77,19 @@ class MyStoliRecyclerViewAdapter(
                         Pair(name, "name"),
                     )
                 itemView.context.startActivity(intent, optionsCompat.toBundle())
-
-
             }
-
-
         }
     }
 
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Story>() {
+            override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
+    }
 }

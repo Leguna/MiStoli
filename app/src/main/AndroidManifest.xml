@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -25,6 +26,11 @@
         android:supportsRtl="true"
         android:theme="@style/MiStoly"
         tools:targetApi="s">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
         <service
             android:name=".services.StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
@@ -76,6 +82,10 @@
             android:name=".ui.auth.SignUpActivity"
             android:exported="false"
             android:theme="@style/MiStoly.NoActionBar" />
+        <activity
+            android:name=".ui.maps.MapsActivity"
+            android:exported="false"
+            android:label="@string/map" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
